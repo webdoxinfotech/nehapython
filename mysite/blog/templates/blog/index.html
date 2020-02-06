@@ -1,0 +1,41 @@
+ {% extends 'blog/base.html' %}
+
+
+ {% block content %}
+ 
+       {#<img src="{% static 'img/wwjpg.jpg' %}"> #}
+
+        <div>
+            <h1><a href="/">Django Girls Blog</a></h1>
+        </div>
+
+    	{% for post in page_obj %}
+        <div>
+            <p>{{ post.published_date }}</p>
+            <img src="/media/{{ post.document }}" width="300">
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title|upper }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}}</p>
+        </div>
+        {% endfor %}
+
+
+        <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+ {% endblock %}

@@ -1,0 +1,21 @@
+ {% extends 'blog/base.html' %}
+
+
+ {% block content %}
+ 
+       {#<img src="{% static 'img/wwjpg.jpg' %}"> #}
+
+        <div>
+            <h1><a href="/">Django Girls Blog</a></h1>
+        </div>
+
+    	{% for post in posts %}
+        <div>
+            <p>{{ post.published_date }}</p>
+            <img src="/media/{{ post.document }}" width="300">
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title|upper }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}}</p>
+        </div>
+        {% endfor %}
+
+ {% endblock %}
